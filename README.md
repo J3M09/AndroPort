@@ -40,12 +40,9 @@ Tech: WinUI 3 + Windows App SDK 2.5.1, .NET 8, self-contained unpackaged deploym
 
 ## Screenshots / visual tour
 
-Save your 5 app screenshots with exactly these filenames so this guide renders on GitHub:
-
 | File | Shows |
 |------|-------|
 | `01-main-phone-tab.png` | Main window, Phone tab |
-| `02-about-dialog.png` | About dialog |
 | `03-help-connect.png` | Help / connect checklist |
 | `04-transfer-center.png` | Transfer tab |
 | `05-activity-log.png` | Activity tab |
@@ -64,9 +61,7 @@ Save your 5 app screenshots with exactly these filenames so this guide renders o
 
 ### 2. About dialog
 
-![About dialog](docs/screenshots/02-about-dialog.png)
-
-`About` shows:
+`About` (footer, next to `Help`) shows:
 
 > AndroPort 2.0 — AndroPort is a modern WinUI 3 desktop app for copying folders and files between Windows and Android with the bundled Android Platform Tools. Created by Jem Hilario.
 
