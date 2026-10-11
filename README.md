@@ -2,6 +2,13 @@
 
 ![AndroPort logo](docs/screenshots/logo.png)
 
+![Version](https://img.shields.io/badge/version-2.0.0-blue)
+![Platform](https://img.shields.io/badge/platform-Windows_10_/_11-0078D6?logo=windows&logoColor=white)
+![.NET](https://img.shields.io/badge/.NET-8-512BD4?logo=dotnet&logoColor=white)
+![C#](https://img.shields.io/badge/C%23-512BD4?logo=csharp&logoColor=white)
+![WinUI 3](https://img.shields.io/badge/WinUI-3-0078D4?logo=windows&logoColor=white)
+![Platform-Tools](https://img.shields.io/badge/Platform--Tools-37.0.0-3DDC84?logo=android&logoColor=white)
+
 Fast file transfer between Windows and Android that bypasses slow Windows MTP.
 
 AndroPort is a modern WinUI 3 desktop app for copying folders and files between Windows and Android with the bundled Android Platform Tools.
@@ -9,6 +16,25 @@ AndroPort is a modern WinUI 3 desktop app for copying folders and files between 
 Created by Jem Hilario.
 
 **Current version:** 2.0.0 (`AndroPort-v2.0.0-win-x64.msi`)
+
+## Tech Stack
+
+### Languages
+
+![C#](https://img.shields.io/badge/C%23-512BD4?logo=csharp&logoColor=white)
+
+### Desktop & Frameworks
+
+![.NET](https://img.shields.io/badge/.NET-512BD4?logo=dotnet&logoColor=white)
+![WinUI](https://img.shields.io/badge/WinUI-0078D4?logo=windows&logoColor=white)
+![Windows App SDK](https://img.shields.io/badge/Windows_App_SDK-2.5.1-0078D6?logo=windows&logoColor=white)
+![WinForms](https://img.shields.io/badge/WinForms-512BD4?logo=dotnet&logoColor=white)
+
+### Tools & Platform
+
+![ADB](https://img.shields.io/badge/ADB-Platform--Tools-3DDC84?logo=android&logoColor=white)
+![WiX](https://img.shields.io/badge/WiX-v5-orange)
+![PowerShell](https://img.shields.io/badge/PowerShell-5391FE?logo=powershell&logoColor=white)
 
 ---
 
