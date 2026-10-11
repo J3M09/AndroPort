@@ -299,16 +299,6 @@ Local-only. The app launches the bundled `adb.exe` to talk directly to the devic
 
 - Stay under `/sdcard/...`, check spelling, use `Use selected folder`
 
-**MSI in repo root**
-
-- Don't commit the 61 MB `.msi` to git — upload to `Releases` instead. Consider adding `*.msi` to `.gitignore`.
-
-## Reporting issues
-
-1. Reproduce it
-2. `Activity > Export log` → save file
-3. GitHub `Issues > New issue` with: Windows version, phone + Android version, cable/port, AndroPort version, steps, expected vs actual, log, status-card screenshot
-
 ## Credits
 
 Created by Jem Hilario.
