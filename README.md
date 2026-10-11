@@ -2,22 +2,16 @@
 
 <p align="center">
   <img src="docs/screenshots/logo.png" width="120" alt="AndroPort logo" />
-</p>
-
-<p align="center"><strong>Fast file transfer between Windows and Android that bypasses slow Windows MTP.</strong></p>
-
-<p align="center">
-
-![Version](https://img.shields.io/badge/version-2.0.0-blue)
-![Platform](https://img.shields.io/badge/platform-Windows_10_/_11-0078D6?logo=windows&logoColor=white)
-![.NET](https://img.shields.io/badge/.NET-8-512BD4?logo=dotnet&logoColor=white)
-![C#](https://img.shields.io/badge/C%23-512BD4?logo=csharp&logoColor=white)
-![WinUI 3](https://img.shields.io/badge/WinUI-3-0078D4?logo=windows&logoColor=white)
-![Platform-Tools](https://img.shields.io/badge/Platform--Tools-37.0.0-3DDC84?logo=android&logoColor=white)
-
-</p>
-
-<p align="center">
+  <br />
+  <strong>Fast file transfer between Windows and Android that bypasses slow Windows MTP.</strong>
+  <br />
+  <img src="https://img.shields.io/badge/version-2.0.0-blue" alt="Version" />
+  <img src="https://img.shields.io/badge/platform-Windows_10_/_11-0078D6?logo=windows&logoColor=white" alt="Platform" />
+  <img src="https://img.shields.io/badge/.NET-8-512BD4?logo=dotnet&logoColor=white" alt=".NET" />
+  <img src="https://img.shields.io/badge/C%23-512BD4?logo=csharp&logoColor=white" alt="C#" />
+  <img src="https://img.shields.io/badge/WinUI-3-0078D4?logo=windows&logoColor=white" alt="WinUI 3" />
+  <img src="https://img.shields.io/badge/Platform--Tools-37.0.0-3DDC84?logo=android&logoColor=white" alt="Platform-Tools" />
+  <br />
   <a href="https://github.com/J3M09/AndroPort/releases"><strong>Download AndroPort-v2.0.0-win-x64.msi</strong></a>
 </p>
 
