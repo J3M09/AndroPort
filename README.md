@@ -1,6 +1,12 @@
 # AndroPort
 
-![AndroPort logo](docs/screenshots/logo.png)
+<p align="center">
+  <img src="docs/screenshots/logo.png" width="120" alt="AndroPort logo" />
+</p>
+
+<p align="center"><strong>Fast file transfer between Windows and Android that bypasses slow Windows MTP.</strong></p>
+
+<p align="center">
 
 ![Version](https://img.shields.io/badge/version-2.0.0-blue)
 ![Platform](https://img.shields.io/badge/platform-Windows_10_/_11-0078D6?logo=windows&logoColor=white)
@@ -9,13 +15,29 @@
 ![WinUI 3](https://img.shields.io/badge/WinUI-3-0078D4?logo=windows&logoColor=white)
 ![Platform-Tools](https://img.shields.io/badge/Platform--Tools-37.0.0-3DDC84?logo=android&logoColor=white)
 
-Fast file transfer between Windows and Android that bypasses slow Windows MTP.
+</p>
+
+<p align="center">
+  <a href="https://github.com/J3M09/AndroPort/releases"><strong>Download AndroPort-v2.0.0-win-x64.msi</strong></a>
+</p>
 
 AndroPort is a modern WinUI 3 desktop app for copying folders and files between Windows and Android with the bundled Android Platform Tools.
 
 Created by Jem Hilario.
 
-**Current version:** 2.0.0 (`AndroPort-v2.0.0-win-x64.msi`)
+## Contents
+
+- [Tech Stack](#tech-stack)
+- [Why AndroPort?](#why-androport)
+- [Features](#features)
+- [Screenshots / visual tour](#screenshots--visual-tour)
+- [Requirements](#requirements)
+- [Install](#install-msi)
+- [How to use](#how-to-use--full-speed-no-mtp)
+- [Button reference](#button-reference)
+- [ADB setup](#adb-setup)
+- [Build from source](#build-from-source)
+- [Troubleshooting](#troubleshooting)
 
 ## Tech Stack
 
