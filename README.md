@@ -17,8 +17,6 @@
 
 <p align="center">AndroPort is a modern WinUI 3 desktop app for copying folders and files between Windows and Android with the bundled Android Platform Tools.</p>
 
-<p align="center">Created by Jem Hilario.</p>
-
 ## Contents
 
 - [Tech Stack](#tech-stack)
@@ -30,7 +28,6 @@
 - [How to use](#how-to-use--full-speed-no-mtp)
 - [Button reference](#button-reference)
 - [ADB setup](#adb-setup)
-- [Build from source](#build-from-source)
 - [Troubleshooting](#troubleshooting)
 
 ## Tech Stack
@@ -105,7 +102,7 @@ Tech: WinUI 3 + Windows App SDK 2.5.1, .NET 8, self-contained unpackaged deploym
 
 `About` (footer, next to `Help`) shows:
 
-> AndroPort 2.0 — AndroPort is a modern WinUI 3 desktop app for copying folders and files between Windows and Android with the bundled Android Platform Tools. Created by Jem Hilario.
+> AndroPort 2.0 — AndroPort is a modern WinUI 3 desktop app for copying folders and files between Windows and Android with the bundled Android Platform Tools.
 
 ### 3. Help — Connect your Android device
 
@@ -140,17 +137,9 @@ Tech: WinUI 3 + Windows App SDK 2.5.1, .NET 8, self-contained unpackaged deploym
 
 ## Requirements
 
-To run:
-
-- Windows 10 version 1809 (build 17763) or newer, x64 (ARM64 build also supported from source)
+- Windows 10 version 1809 (build 17763) or newer, x64
 - Android phone/tablet with USB debugging enabled
 - Data-capable USB cable (charge-only cables will not work)
-
-To build from source:
-
-- .NET 8 SDK or newer
-- Visual Studio with **Windows application development** workload, or .NET CLI on Windows
-- Internet access for first NuGet restore (uses `NuGet.config`)
 
 ## Install (MSI)
 
@@ -243,27 +232,6 @@ Default is correct for most users: `ADB: Bundled platform-tools` with `Auto-dete
 - Use `Choose ADB` only if you need a specific SDK version, then `Auto-detect` to revert
 - Manual check: `adb devices` should show `<serial>  device`; `unauthorized` means approve the phone prompt and `Detect device` again
 
-## Build from source
-
-Source lives in `ADB-File-Transfer-Application` (project `AdbFileTransferApp`, solution `AdbFileTransferApp.slnx`).
-
-```powershell
-dotnet restore AdbFileTransferApp/AdbFileTransferApp.csproj --runtime win-x64 --configfile NuGet.config
-dotnet build AdbFileTransferApp/AdbFileTransferApp.csproj --configuration Release --runtime win-x64 --no-restore
-```
-
-Or open `AdbFileTransferApp.slnx` in Visual Studio (`x64` / `ARM64`).
-
-Release artifacts:
-
-```powershell
-./scripts/Publish-Release.ps1 -Version 2.0.0 -Runtime win-x64
-# -> artifacts/ADB-File-Transfer-v2.0.0-win-x64.zip (portable, self-contained)
-
-./scripts/New-MsiPackage.ps1 -Version 2.0.0 -Runtime win-x64
-# -> artifacts/AndroPort-v2.0.0-win-x64.msi (WiX v5, per-user)
-```
-
 ## Data and privacy
 
 Local-only. The app launches the bundled `adb.exe` to talk directly to the device. No file uploads or telemetry.
@@ -294,7 +262,5 @@ Local-only. The app launches the bundled `adb.exe` to talk directly to the devic
 - Stay under `/sdcard/...`, check spelling, use `Use selected folder`
 
 ## Credits
-
-Created by Jem Hilario.
 
 Android Debug Bridge and Platform Tools by Google (see `platform-tools/NOTICE.txt` in source).
