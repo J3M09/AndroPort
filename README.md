@@ -1,12 +1,14 @@
 # AndroPort
 
+![AndroPort logo](docs/screenshots/logo.png)
+
 Fast file transfer between Windows and Android that bypasses slow Windows MTP.
 
 AndroPort is a modern WinUI 3 desktop app for copying folders and files between Windows and Android with the bundled Android Platform Tools.
 
 Created by Jem Hilario.
 
-**Current version:** 2.0
+**Current version:** 2.0.0 (`AndroPort-v2.0.0-win-x64.msi`)
 
 ---
 
@@ -14,19 +16,39 @@ Created by Jem Hilario.
 
 Windows Explorer MTP transfer is slow, stalls on large folders, and often fails on many small files.
 
-AndroPort uses ADB (`adb push` / `adb pull`) over USB debugging instead of MTP, so you get:
+AndroPort uses ADB (`adb push` / `adb pull`) over USB debugging instead of MTP, so you get full USB bulk speed:
 
-- Full USB speed bulk transfer
-- Reliable folder copy (no Explorer freeze)
-- Browse phone storage (`/sdcard`) directly from Windows
-- Push (PC → phone) and Pull (phone → PC) in either direction
-- Activity log with export for troubleshooting
+- Browse internal phone storage and removable cards from Windows
+- Pull files/folders or a whole storage root from Android to PC
+- Push multiple PC files or a whole folder to Android
+- Live progress, byte count, speed, elapsed time, and ETA
+- Cancel safely, skip recoverable per-item errors, export activity log
+- No separate ADB install — Platform Tools 37.0.0 is embedded in the app
 
-No separate ADB install needed — platform-tools are bundled.
+## Features
 
-## Screenshots
+- Phone storage browser with expandable roots and multi-select
+- `Pull selected`, `Pull storage`, `Push files`, `Push folder`, `Pull selected to PC`
+- `Phone destination` textbox + `Use selected folder` shortcut
+- `Folder uploads` toggle: copy the folder vs. copy only its contents
+- Automatic detection of connected / unauthorized / offline / missing devices
+- `Choose ADB` for a custom `adb.exe`, `Auto-detect` to return to bundled tools
+- Native Windows light/dark theme + Mica backdrop
+- Timestamped activity log with `Export log`
 
-> Save the app screenshots to `docs/screenshots/` with the names below to enable this guided tour.
+Tech: WinUI 3 + Windows App SDK 2.5.1, .NET 8, self-contained unpackaged deployment. No .NET or App SDK runtime to install separately.
+
+## Screenshots / visual tour
+
+Save your 5 app screenshots with exactly these filenames so this guide renders on GitHub:
+
+| File | Shows |
+|------|-------|
+| `01-main-phone-tab.png` | Main window, Phone tab |
+| `02-about-dialog.png` | About dialog |
+| `03-help-connect.png` | Help / connect checklist |
+| `04-transfer-center.png` | Transfer tab |
+| `05-activity-log.png` | Activity tab |
 
 ### 1. Main window — Phone tab
 
@@ -35,8 +57,8 @@ No separate ADB install needed — platform-tools are bundled.
 - Top bar: `Detect device`, `Refresh`, `Cancel`, `Choose ADB`, `Auto-detect`
 - Status card: `No Android device detected. Connect your phone and approve USB debugging.` / `ADB: Bundled platform-tools` / `TRANSFER: Idle`
 - Tabs: `Phone` | `Transfer` | `Activity`
-- Phone tab actions: `Pull selected`, `Pull storage`
-- Left: `Phone storage — Folders and storage roots` — e.g. `Phone Storage (/sdcard)`
+- Phone tab: `Pull selected`, `Pull storage`
+- Left: `Phone storage — Folders and storage roots`, e.g. `Phone Storage (/sdcard)`
 - Right: `Phone files — /sdcard` + `Select all`
 - Footer: `AndroPort 2.0 • Bundled Android Platform Tools` + `Help` / `About`
 
@@ -44,7 +66,7 @@ No separate ADB install needed — platform-tools are bundled.
 
 ![About dialog](docs/screenshots/02-about-dialog.png)
 
-`About` button shows:
+`About` shows:
 
 > AndroPort 2.0 — AndroPort is a modern WinUI 3 desktop app for copying folders and files between Windows and Android with the bundled Android Platform Tools. Created by Jem Hilario.
 
@@ -52,7 +74,7 @@ No separate ADB install needed — platform-tools are bundled.
 
 ![Help dialog](docs/screenshots/03-help-connect.png)
 
-`Help` button shows the 5-step connect checklist:
+`Help` shows the connect checklist:
 
 1. Enable Developer options.
 2. Turn on USB debugging.
@@ -64,12 +86,10 @@ No separate ADB install needed — platform-tools are bundled.
 
 ![Transfer center](docs/screenshots/04-transfer-center.png)
 
-`Transfer` tab:
+`Transfer` tab — `Transfer center — Copy safely in either direction`:
 
-- `Transfer center — Copy safely in either direction`
-- `Phone destination` textbox (default `/sdcard`)
-- `Use selected folder` button
-- `Folder uploads` — `Copy the folder` toggle
+- `Phone destination` (default `/sdcard`), `Use selected folder`
+- `Folder uploads` toggle (`Copy the folder` / `Copy only its contents`)
 - `Push files`, `Push folder`, `Pull selected to PC`
 - `Ready to transfer — No active item`
 
@@ -77,181 +97,177 @@ No separate ADB install needed — platform-tools are bundled.
 
 ![Activity log](docs/screenshots/05-activity-log.png)
 
-`Activity` tab:
-
-- `Activity log` + `Export log` button for diagnostics.
+`Activity` tab — `Activity log` + `Export log` for diagnostics.
 
 ---
 
 ## Requirements
 
-- Windows 10 1809+ / Windows 11 x64
-- Android phone/tablet with USB cable that supports data (not charge-only)
-- USB debugging enabled on the phone
-- AndroPort installer: `AndroPort-v2.0.0-win-x64.msi` from GitHub Releases
+To run:
 
-No manual ADB / driver install in most cases. Windows will use the bundled `platform-tools`.
+- Windows 10 version 1809 (build 17763) or newer, x64 (ARM64 build also supported from source)
+- Android phone/tablet with USB debugging enabled
+- Data-capable USB cable (charge-only cables will not work)
 
-## Install
+To build from source:
 
-1. Go to this repo on GitHub: `https://github.com/J3M09/AndroPort`
-2. Open `Releases` (right sidebar on desktop, or `Code ▾` if no release yet).
-3. Download `AndroPort-v2.0.0-win-x64.msi`.
-4. Double-click the `.msi` and follow the wizard.
-5. Launch `AndroPort` from Start Menu.
+- .NET 8 SDK or newer
+- Visual Studio with **Windows application development** workload, or .NET CLI on Windows
+- Internet access for first NuGet restore (uses `NuGet.config`)
 
-> For repo navigation: `Code` = files + README, `Releases` = installer download, `Issues` = bug reports, `Activity` = recent history.
+## Install (MSI)
 
-## Quick start — first transfer in 5 minutes
+1. On GitHub open this repo: `https://github.com/J3M09/AndroPort`
+2. Open `Releases` → download `AndroPort-v2.0.0-win-x64.msi`
+3. Double-click the `.msi` and follow the wizard (per-user install to `%LOCALAPPDATA%\AndroPort`, no UAC prompt, Start Menu shortcut `AndroPort`)
+4. Launch `AndroPort` from Start Menu
 
-### Step 1: Enable USB debugging on Android
+Unsigned build note: SmartScreen may warn until the app establishes reputation or is signed with a trusted certificate.
 
-1. On phone: `Settings > About phone > Build number` — tap 7 times until `You are now a developer`.
-2. Go to `Settings > System > Developer options` (on Samsung: `Settings > Developer options`).
-3. Turn on `USB debugging`. Tap `OK` on the warning.
+## Navigating this repository on GitHub
 
-### Step 2: Connect and approve
+- `Code` tab — this README, `docs/screenshots/`, installer notes
+- `Releases` — download the `.msi` installer
+- `Issues` — report bugs (attach exported log + screenshots)
+- `Commits / Activity` — what changed
 
-1. Connect phone to PC with a data-capable USB cable.
-2. Unlock the phone.
-3. When prompted `Allow USB debugging?` check `Always allow from this computer` → `Allow`.
-4. If no prompt appears, unplug/replug and try a different cable/port.
+## How to use — full speed, no MTP
 
-### Step 3: Detect in AndroPort
+### 1. Enable USB debugging on the phone
 
-1. Open AndroPort.
-2. Top bar shows `ADB: Bundled platform-tools`. Leave `Auto-detect` on unless you need a custom ADB (see below).
-3. Click `Detect device`.
-4. Status card changes from `No Android device detected` to connected device.
-5. If still not detected, click `Help` and walk the 5-step checklist, then `Refresh`.
+1. `Settings > About phone > Build number` — tap 7 times until `You are now a developer`
+2. `Settings > System > Developer options` (Samsung: `Settings > Developer options`)
+3. Turn on `USB debugging` → `OK`
 
-### Step 4: Browse phone files
+### 2. Connect and approve
 
-1. Stay on `Phone` tab.
-2. Left panel `Phone storage` → select `Phone Storage (/sdcard)`.
-3. Right panel `Phone files` lists `/sdcard`. Double-click folders to navigate.
-4. Use `Select all` or tick individual files/folders.
+1. Connect with a data-capable cable
+2. Unlock the phone
+3. Approve `Allow USB debugging?` (tick `Always allow from this computer` → `Allow`)
+4. No prompt? Unplug/replug, try another cable/port, toggle USB debugging off/on
 
-### Step 5: Pull (Phone → PC)
+### 3. Detect in AndroPort
 
-Option A — quick buttons on Phone tab:
+1. Open AndroPort — top bar should say `ADB: Bundled platform-tools`, `Auto-detect` on
+2. Click `Detect device`
+3. Status card switches from `No Android device detected` to your device
+4. Still missing? Open `Help`, walk the 5 steps, then `Refresh`. Check `Activity > Export log` for `unauthorized` / `offline` hints
 
-- Select files → `Pull selected` → choose PC destination folder.
-- Full backup: `Pull storage`.
+### 4. Browse phone files
 
-Option B — from Transfer tab:
+1. `Phone` tab → left `Phone storage` → select `Phone Storage (/sdcard)`
+2. Right `Phone files` lists `/sdcard` — double-click to enter folders
+3. Tick items or use `Select all`
 
-- Select files on Phone tab first, then open `Transfer` tab.
-- Click `Pull selected to PC` → choose destination.
+### 5. Pull — Phone → PC
 
-### Step 6: Push (PC → Phone)
+- Phone tab: select → `Pull selected` → pick PC folder; or `Pull storage` for a full `/sdcard` backup
+- Or Transfer tab: `Pull selected to PC`
 
-1. Open `Transfer` tab.
-2. Set `Phone destination`, e.g.:
-   - `/sdcard` (root)
-   - `/sdcard/Download`
-   - `/sdcard/DCIM/Camera`
-3. Tip: click `Use selected folder` to fill this from your current Phone-tab folder.
-4. `Folder uploads` → `Copy the folder` toggle:
-   - ON = copy the folder itself, e.g. `MyPics` → `/sdcard/Download/MyPics`
-   - OFF = copy only its contents
-5. Click `Push files` (pick one or more files) or `Push folder` (pick a folder).
-6. Wait for `Ready to transfer` to go idle. Use `Cancel` to abort.
+### 6. Push — PC → Phone
 
-### Step 7: Verify in Activity log
+1. `Transfer` tab → set `Phone destination`, e.g. `/sdcard`, `/sdcard/Download`, `/sdcard/DCIM/Camera`
+2. Tip: `Use selected folder` fills it from your current Phone-tab folder
+3. `Folder uploads` toggle:
+   - `Copy the folder` = `MyPics` → `/sdcard/Download/MyPics`
+   - `Copy only its contents` = contents of `MyPics` → directly into destination
+4. `Push files` (one or more files) or `Push folder`
+5. Watch live progress/speed/ETA. `Cancel` aborts safely
 
-1. Open `Activity` tab.
-2. Check commands and errors.
-3. Click `Export log` and attach the file when reporting an issue.
+### 7. Check the log
 
----
+`Activity` tab → review commands/errors → `Export log` when asking for help.
 
 ## Button reference
 
-| Button | Where | What it does |
-|--------|-------|--------------|
-| `Detect device` | Top bar | Runs `adb devices`, authorizes and lists device |
-| `Refresh` | Top bar | Re-lists current `/sdcard` folder |
-| `Cancel` | Top bar | Aborts active push/pull |
-| `Choose ADB` | Top bar | Use a custom `adb.exe` instead of bundled |
-| `Auto-detect` | Top bar | Switch back to bundled `platform-tools` |
-| `Pull selected` | Phone | Copy checked phone files to PC |
-| `Pull storage` | Phone | Copy entire `/sdcard` to PC |
-| `Select all` | Phone files | Check all files in current folder |
-| `Use selected folder` | Transfer | Fill `Phone destination` from Phone-tab selection |
-| `Push files` | Transfer | PC files → phone destination |
-| `Push folder` | Transfer | PC folder → phone destination |
-| `Pull selected to PC` | Transfer | Same as `Pull selected`, from Transfer tab |
-| `Export log` | Activity | Save activity log to `.txt`/`.log` |
-| `Help` | Footer | Show connect checklist |
-| `About` | Footer | Show version + description |
+| Button | Where | Does |
+|--------|-------|------|
+| `Detect device` | Top bar | `adb devices`, authorize + list device |
+| `Refresh` | Top bar | Re-list current folder |
+| `Cancel` | Top bar | Abort active transfer |
+| `Choose ADB` | Top bar | Use custom `adb.exe` |
+| `Auto-detect` | Top bar | Back to bundled platform-tools |
+| `Pull selected` | Phone | Phone files → PC |
+| `Pull storage` | Phone | Whole `/sdcard` → PC |
+| `Select all` | Phone files | Select all in folder |
+| `Use selected folder` | Transfer | Fill destination from Phone tab |
+| `Push files` | Transfer | PC files → phone |
+| `Push folder` | Transfer | PC folder → phone |
+| `Pull selected to PC` | Transfer | Same as `Pull selected` |
+| `Export log` | Activity | Save timestamped log |
+| `Help` | Footer | Connect checklist |
+| `About` | Footer | Version + description |
 
 ## ADB setup
 
-Default is correct for most users: `ADB: Bundled platform-tools`.
+Default is correct for most users: `ADB: Bundled platform-tools` with `Auto-detect` on.
 
-- Keep `Auto-detect` enabled.
-- Use `Choose ADB` only if you already have Android SDK Platform-Tools and need a specific version. Point it to your `adb.exe`.
-- To revert: click `Auto-detect`.
+- Platform Tools 37.0.0 is embedded in the exe and extracted on first run under `%LOCALAPPDATA%\AdbFileTransferApp\EmbeddedPlatformTools\`
+- Use `Choose ADB` only if you need a specific SDK version, then `Auto-detect` to revert
+- Manual check: `adb devices` should show `<serial>  device`; `unauthorized` means approve the phone prompt and `Detect device` again
 
-Verify ADB manually if needed:
+## Build from source
+
+Source lives in `ADB-File-Transfer-Application` (project `AdbFileTransferApp`, solution `AdbFileTransferApp.slnx`).
 
 ```powershell
-# bundled adb is alongside the installed app; custom adb example:
-adb devices
-# expected: <serial>  device
-# if `unauthorized`: unlock phone and approve the prompt, then Detect device again
+dotnet restore AdbFileTransferApp/AdbFileTransferApp.csproj --runtime win-x64 --configfile NuGet.config
+dotnet build AdbFileTransferApp/AdbFileTransferApp.csproj --configuration Release --runtime win-x64 --no-restore
 ```
+
+Or open `AdbFileTransferApp.slnx` in Visual Studio (`x64` / `ARM64`).
+
+Release artifacts:
+
+```powershell
+./scripts/Publish-Release.ps1 -Version 2.0.0 -Runtime win-x64
+# -> artifacts/ADB-File-Transfer-v2.0.0-win-x64.zip (portable, self-contained)
+
+./scripts/New-MsiPackage.ps1 -Version 2.0.0 -Runtime win-x64
+# -> artifacts/AndroPort-v2.0.0-win-x64.msi (WiX v5, per-user)
+```
+
+## Data and privacy
+
+Local-only. The app launches the bundled `adb.exe` to talk directly to the device. No file uploads or telemetry.
+
+- Settings: `%LOCALAPPDATA%\AdbFileTransferApp\settings.json`
+- Extracted tools: `%LOCALAPPDATA%\AdbFileTransferApp\EmbeddedPlatformTools\`
+- Install folder (MSI): `%LOCALAPPDATA%\AndroPort\` (`AdbFileTransferApp.exe`)
 
 ## Troubleshooting
 
-**`No Android device detected`**
+**No device detected**
 
-- Use a data cable, not charge-only. Try another cable/port (prefer rear motherboard USB).
-- Unlock phone, approve `Allow USB debugging`.
-- Toggle USB debugging off/on, replug, click `Detect device` → `Refresh`.
-- Check `Transfer: Idle` — if stuck, click `Cancel` and retry.
-- Samsung / others: install OEM USB driver if device never appears in Device Manager.
+- Data cable only, try another cable/port (rear motherboard USB, no hub for big transfers)
+- USB mode that permits data, unlock phone, approve prompt
+- `Detect device` → `Refresh`; close other ADB tools
 
-**Shows `unauthorized`**
+**Unauthorized / offline**
 
-- Disconnect, revoke authorizations: `Developer options > Revoke USB debugging authorizations`, reconnect, approve again.
+- Unlock + approve; `Developer options > Revoke USB debugging authorizations` → reconnect
+- Replug, `Detect device` again, check Activity log
 
-**`adb devices` empty but MTP Explorer works**
+**MTP works but ADB is empty**
 
-- MTP and ADB are different modes. ADB requires USB debugging ON. MTP alone is not enough.
+- Normal: MTP ≠ ADB. ADB needs USB debugging ON.
 
-**Push fails / permission denied**
+**Push denied / wrong path**
 
-- Don't push to system paths. Stay under `/sdcard/...`.
-- Check `Phone destination` spelling — must start with `/sdcard` or full path shown in Phone tab.
-- Path with spaces is OK, keep default unless you need a subfolder.
+- Stay under `/sdcard/...`, check spelling, use `Use selected folder`
 
-**Slow or stuck transfer**
+**MSI in repo root**
 
-- Don't use a USB hub for large transfers.
-- Use `Cancel`, `Refresh`, retry smaller batch, check `Activity > Export log`.
-
-**App shows `ADB: Custom` and fails after update**
-
-- Click `Auto-detect` to return to bundled platform-tools.
+- Don't commit the 61 MB `.msi` to git — upload to `Releases` instead. Consider adding `*.msi` to `.gitignore`.
 
 ## Reporting issues
 
-1. Reproduce the problem.
-2. Open `Activity` tab → `Export log` → save file.
-3. On GitHub open `Issues > New issue`.
-4. Include: Windows version, phone model + Android version, cable/port, AndroPort version (footer, e.g. `2.0`), steps, expected vs actual, exported log (redact personal filenames if needed), screenshot of status card.
-
-## For maintainers
-
-- Public repo: `https://github.com/J3M09/AndroPort`
-- `Code` tab holds `README.md`, `docs/screenshots/`, `.gitattributes`.
-- Do not commit the `.msi` to git — upload it to `Releases` instead (61 MB+). Add `*.msi` to `.gitignore` if needed.
-- Screenshots in this README are loaded from `docs/screenshots/*.png`. See `docs/screenshots/README.md` for required filenames.
+1. Reproduce it
+2. `Activity > Export log` → save file
+3. GitHub `Issues > New issue` with: Windows version, phone + Android version, cable/port, AndroPort version, steps, expected vs actual, log, status-card screenshot
 
 ## Credits
 
-AndroPort 2.0 — modern WinUI 3 desktop app for copying folders and files between Windows and Android with the bundled Android Platform Tools.
-
 Created by Jem Hilario.
+
+Android Debug Bridge and Platform Tools by Google (see `platform-tools/NOTICE.txt` in source).
