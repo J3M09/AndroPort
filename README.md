@@ -15,6 +15,7 @@
   <a href="https://github.com/J3M09/AndroPort/releases"><strong>Download AndroPort-v2.0.0-win-x64.msi</strong></a>
 </p>
 
+<p align="center">A modern WinUI 3 desktop app for copying folders and files between Windows and Android with the bundled Android Platform Tools.</p>
 
 ## Contents
 
